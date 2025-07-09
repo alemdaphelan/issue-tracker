@@ -2,9 +2,8 @@ const chaiHttp = require('chai-http');
 const chai = require('chai');
 const assert = chai.assert;
 const server = require('../server');
-const {expect}  = chai;
 chai.use(chaiHttp);
-
+const expect  = chai.expect;
 suite('Functional Tests', function() {
 
     const checkValidFields = (res,issue = {}) =>{
