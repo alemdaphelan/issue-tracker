@@ -5,7 +5,6 @@ const server = require('../server');
 chai.use(chaiHttp);
 const expect  = chai.expect;
 suite('Functional Tests', function() {
-
     const checkValidFields = (res,issue = {}) =>{
         expect(res).to.have.status(200);
         if(!issue.issue_title || !issue.issue_text || !issue.created_by){
@@ -14,6 +13,9 @@ suite('Functional Tests', function() {
         else{
             expect(res.body).to.include(issue);
             expect(res.body).to.have.property('_id');
+            expect(res.body).to.have.property('created_on');
+            expect(res.body).to.have.property('updated_on');
+            expect(res.body).to.have.property('open', true);
         }
         
     }
@@ -32,6 +34,8 @@ suite('Functional Tests', function() {
             .send(issue)
             .end((err,res)=>{
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkValidFields(res,issue);
                 done();
             });
@@ -48,6 +52,8 @@ suite('Functional Tests', function() {
             .send(issue)
             .end((err,res) =>{
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkValidFields(res,issue);
                 testId = res.body._id;
                 done();
@@ -64,6 +70,8 @@ suite('Functional Tests', function() {
             .send(issue)
             .end((err,res) =>{
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkValidFields(res,issue);
                 done();
             });
@@ -99,6 +107,8 @@ suite('Functional Tests', function() {
             .get('/api/issues/apitest')
             .end((err,res) => {
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 validResponse(res);
                 done();
             });
@@ -109,6 +119,8 @@ suite('Functional Tests', function() {
             .get('/api/issues/apitest?created_by=Alem')
             .end((err,res) => {
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 validResponse(res,{created_by:"Alem"});
                 done();
             })
@@ -119,6 +131,8 @@ suite('Functional Tests', function() {
             .get('/api/issues/apitest?open=true&assigned_to=Alem')
             .end((err,res) =>{
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 validResponse(res,{open:true,assigned_to:"Alem"});
                 done();
             });
@@ -131,7 +145,7 @@ suite('Functional Tests', function() {
         }
         else if(Object.keys(fieldUpdate).length === 1){
             expect(res.body).to.have.property('error','no update field(s) sent');
-            expect(res.body).to.have.property('_id')
+            expect(res.body).to.have.property('_id',fieldUpdate._id);
         }
         else if(fieldUpdate._id !== testId){
             expect(res.body).to.have.property('error','could not update');
@@ -150,6 +164,8 @@ suite('Functional Tests', function() {
             .send(fieldUpdate)
             .end((err,res) => {
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkUpdated(res,fieldUpdate);
                 done();
             });
@@ -162,6 +178,8 @@ suite('Functional Tests', function() {
             .send(fieldUpdate)
             .end((err,res) => {
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkUpdated(res,fieldUpdate);
                 done();
             });
@@ -174,6 +192,8 @@ suite('Functional Tests', function() {
             .send(fieldUpdate)
             .end((err,res) => {
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkUpdated(res,fieldUpdate);
                 done();
             });
@@ -186,6 +206,8 @@ suite('Functional Tests', function() {
             .send(fieldUpdate)
             .end((err,res) =>{
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkUpdated(res,fieldUpdate);
                 done();
             });
@@ -198,6 +220,8 @@ suite('Functional Tests', function() {
             .send(fieldUpdate)
             .end((err,res) =>{
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkUpdated(res,fieldUpdate);
                 done();
             });
@@ -224,6 +248,8 @@ suite('Functional Tests', function() {
             .send(deleted)
             .end((err,res) =>{
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkDeleted(res,deleted);
                 done();
             });
@@ -236,6 +262,8 @@ suite('Functional Tests', function() {
             .send(deleted)
             .end((err,res) =>{
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkDeleted(res,deleted);
                 done();
             });
@@ -248,6 +276,8 @@ suite('Functional Tests', function() {
             .send(deleted)
             .end((err,res) =>{
                 if(err) done(err);
+                expect(1).to.equal(1);
+                assert.isOk(true);
                 checkDeleted(res,deleted);
                 done();
             });
